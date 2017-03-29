@@ -1,63 +1,80 @@
-var myStepDefinitionsWrapper = function () {
+var LoginPage = require('./pageobjects/login.page');
+var MailBoxPage = require('./pageobjects/mailbox.page');
+var account = {
+    empty : '',
+    wrong : 'abc'
+};
+const boxUrl = 'https://mail.google.com/';
 
-  this.Given(/^I browse "([^"]*)"$/, function (url) {
-    browser.url(url);
-  });
-    
-  this.Given(/^I "([^"]*)" see password page for "([^"]*)"$/, {timeout: 6000 * 1000}, function (must, account) {
-	  // browser.debug();
-	  if(!must){
-	   if(!browser.isVisible('input#Passwd')){
-        if(browser.getTitle().includes(account)) {
-           browser.click('//*/div[1]/div[1]/div[2]/div[4]/div[1]/a/span');
-           browser.click('=Sign out');
-       }
-        if(browser.isVisible('input#Email')){
-           browser.setValue('input#Email', account);
-           browser.click('#next');
-       }
-	   }
-	  }
-	  browser.waitForVisible('input#Passwd');
-	  expect(browser.isVisible('input#Passwd')).toBe(true);
-	  expect(browser.getText('span*=@gmail')).toBe(account);
-  });
-   
-  this.Given(/^I fill in "([^"]*)" field with "([^"]*)"$/, function (selector, content) {
-   browser.waitForVisible(selector);
-   browser.setValue(selector, content);
+var myStepDefinitionsWrapper = function () {
+  
+  this.Given(/^I have "([^"]*)" email with "([^"]*)" password$/, function (email, passwd) {
+    account.email = email;
+    account.passwd = passwd;
   });
   
-  this.Then(/^Account is "([^"]*)"$/, function (account) {
-    expect(browser.getTitle()).toContain(account);
+  this.Given(/^I browse my mail-box$/, function () {
+    MailBoxPage.open();
   });
-  
-  this.Given(/^I "([^"]*)" have access to "([^"]*)"$/, function (must, url) {
-    if(!must){
-	browser.waitForVisible('input#Passwd');
-	browser.setValue('input#Passwd', 'oon9ahquohTi4mai');
-	browser.click('#signIn');
-	}
-	if(browser.getUrl()!= url){
-		browser.url(url);
-		if (browser.alertText()) browser.alertAccept();
-	}
-    expect(browser.getUrl()).toBe(url);
+
+  this.Given(/^I go to password page$/, function () {
+    if ( !LoginPage.passwdInputField.isVisible() ){
+        if ( browser.getUrl().startsWith(boxUrl) ) MailBoxPage.signOut();
+        if ( LoginPage.emailInputField.isVisible() ) LoginPage.submitEmail(account.email);
+    }
+  });
+
+  this.When(/^I submit "([^"]*)" password$/, function (passkey) {
+   switch(passkey){
+       case 'my':
+       LoginPage.submitPasswd(account.passwd);
+       break;
+       
+       case 'empty':
+       LoginPage.submitPasswd(account.empty);
+       break;
+       
+       case 'wrong':
+       LoginPage.submitPasswd(account.wrong);
+       break;
+   }
   });
    
-  this.When(/^I click "([^"]*)"$/, function (selector) {
-   if(selector == "=Sign out") browser.click('//*/div[1]/div[1]/div[2]/div[4]/div[1]/a/span');
-   browser.waitForExist(selector);
-   browser.click(selector);
-  });
-   
-  this.Then(/^I see "([^"]*)"$/, function (selector) {
-	expect(browser.isVisible(selector)).toBe(true);
+  this.Then(/^I see inline errror mesasage$/, function (selector) {
+    var check = LoginPage.passwdErrorMsg();
+    //debugger;
+    expect(check).toBe(true);
   });
   
-  this.Then(/^I must have no access to "([^"]*)"$/, function (url) {
-    browser.url(url);
-    expect(browser.getUrl()).not.toBe(url);
+  this.Then(/^I must have no access to my mail-box$/, function () {
+    MailBoxPage.open();
+	expect( browser.getUrl().startsWith(boxUrl) ).not.toBe(true);
+  });
+  
+  this.Then(/^I have access to my mail-box$/, function () {
+    if ( !browser.getUrl().startsWith(boxUrl) ) {
+            MailBoxPage.open();
+		    if (browser.alertText() ) browser.alertAccept();
+        }
+    expect( browser.getUrl().startsWith(boxUrl) ).toBe(true);
+    expect( MailBoxPage.getTitle() ).toContain(account.email);
+  });
+  
+  this.Given(/^I'm logged in to my mail-box$/, function () {
+    if ( !browser.getUrl().startsWith(boxUrl) ) {
+        LoginPage.open();
+        LoginPage.emailInputField.isVisible() ? LoginPage.login(account) : LoginPage.submitPasswd(account.passwd);
+    }
+  });
+  
+  this.When(/^I sign out$/, function () {
+   MailBoxPage.signOut();
+  });
+  
+  this.Then(/^I see password page for my account$/, function () {
+    LoginPage.passwdInputField.waitForVisible();
+    expect( LoginPage.passwdInputField.isVisible() ).toBe(true);
+    expect( LoginPage.emailDisplayed.getText() ).toBe(account.email);
   });
 };
 module.exports = myStepDefinitionsWrapper;

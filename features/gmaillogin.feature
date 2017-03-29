@@ -1,36 +1,31 @@
+@watch
+
 Feature: Log in/out in to Gmail
   As a mail-box owner 
   I want to login and logout in to the box
   So that I have and haven't access accordingly
-  
-  Background:
-    Given   I browse "http://gmail.com/"
-    And     I "" see password page for "d006068@gmail.com"
 
-   @watch
+  Background:
+    Given   I have "d006068@gmail.com" email with "oon9ahquohTi4mai" password
+    And     I browse my mail-box
+    And     I go to password page
+    
+  Scenario Outline: Enter not valid password
+    When    I submit <pass> password
+    Then    I see inline errror mesasage
+    And     I must have no access to my mail-box
+     Examples:
+      | pass |
+      | "empty" |
+      | "wrong" |
     
   Scenario: Enter valid password
-    When    I fill in "input#Passwd" field with "oon9ahquohTi4mai"
-    And     I click "#signIn"
-    Then    I "must" have access to "https://mail.google.com/mail/#inbox"
-    And     Account is "d006068@gmail.com"
-    
-   @watch
-    
-  Scenario: Lock inbox (logout)
-    Given   I "" have access to "https://mail.google.com/mail/#inbox"
-    When    I click "=Sign out"
-    Then    I "must" see password page for "d006068@gmail.com"
-    And     I must have no access to "https://mail.google.com/mail/#inbox"
-    
-   @watch
+    When    I submit "my" password
+    Then    I have access to my mail-box
 
-  Scenario Outline:: Enter not valid password
-    And     I fill in "input#Passwd" field with <pass>
-    And     I click "#signIn"
-    Then    I see <message>
-    And     I must have no access to "https://mail.google.com/mail/#inbox"
-     Examples:
-      | pass | message |
-      | "" | "span*=Введите пароль." |
-      | "123asd" | "span*=Неверный пароль. Повторите попытку." |
+  Scenario: Lock inbox (logout)
+    Given   I'm logged in to my mail-box
+    When    I sign out
+    Then    I see password page for my account
+    And     I must have no access to my mail-box
+      
