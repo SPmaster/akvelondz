@@ -1,16 +1,13 @@
 var LoginPage = require('./pageobjects/login.page');
 var MailBoxPage = require('./pageobjects/mailbox.page');
-var account = {
-    empty : '',
-    wrong : 'abc'
-};
+var account = require('../account');
 const boxUrl = 'https://mail.google.com/';
 
 var myStepDefinitionsWrapper = function () {
   
-  this.Given(/^I have "([^"]*)" email with "([^"]*)" password$/, function (email, passwd) {
-    account.email = email;
-    account.passwd = passwd;
+  this.Given(/^I have email with password$/, function () {
+    expect(account.email).toBeDefined();
+    expect(account.passwd).toBeDefined();
   });
   
   this.Given(/^I browse my mail-box$/, function () {

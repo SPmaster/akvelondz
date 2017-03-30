@@ -6,7 +6,7 @@ Feature: Log in/out in to Gmail
   So that I have and haven't access accordingly
 
   Background:
-    Given   I have "d006068@gmail.com" email with "oon9ahquohTi4mai" password
+    Given   I have email with password
     And     I browse my mail-box
     And     I go to password page
     
