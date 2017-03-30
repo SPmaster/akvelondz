@@ -40,10 +40,8 @@ var myStepDefinitionsWrapper = function () {
    }
   });
    
-  this.Then(/^I see inline errror mesasage$/, function (selector) {
-    var check = LoginPage.passwdErrorMsg();
-    //debugger;
-    expect(check).toBe(true);
+  this.Then(/^I see inline errror mesasage$/, function () {
+    expect( LoginPage.passwdErrorMsg.isVisible() ).toBe(true);
   });
   
   this.Then(/^I must have no access to my mail-box$/, function () {

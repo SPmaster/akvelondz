@@ -7,13 +7,7 @@ var LoginPage = Object.create(Page, {
     nextButton:        { get: function () { return browser.element('#next'); }},
     signInButton:      { get: function () { return browser.element('#signIn'); }},
     emailDisplayed:    { get: function () { return browser.element('span*=@gmail'); }},
-    
-    passwdErrorMsg:    { value: function () {
-        //debugger;
-        this.passwdErrorMsg = browser.isVisible('#errormsg_0_Passwd'); 
-        //return this.passwdErrorMsg;
-    }, writable: true
-    },
+    passwdErrorMsg:    { get: function () { return browser.element('#errormsg_0_Passwd');}},
 
     login: { value: function(account) {
         this.submitEmail(account.email);
