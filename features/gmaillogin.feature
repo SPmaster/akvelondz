@@ -12,7 +12,7 @@ Feature: Log in/out in to Gmail
     
   Scenario Outline: Enter not valid password
     When    I submit <pass> password
-    Then    I see inline errror mesasage
+    Then    I see inline error mesasage
     And     I must have no access to my mail-box
      Examples:
       | pass |
@@ -20,7 +20,7 @@ Feature: Log in/out in to Gmail
       | "wrong" |
     
   Scenario: Enter valid password
-    When    I submit "my" password
+    When    I submit "valid" password
     Then    I have access to my mail-box
 
   Scenario: Lock inbox (logout)

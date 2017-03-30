@@ -26,7 +26,7 @@ var myStepDefinitionsWrapper = function () {
 
   this.When(/^I submit "([^"]*)" password$/, function (passkey) {
    switch(passkey){
-       case 'my':
+       case 'valid':
        LoginPage.submitPasswd(account.passwd);
        break;
        
@@ -40,7 +40,7 @@ var myStepDefinitionsWrapper = function () {
    }
   });
    
-  this.Then(/^I see inline errror mesasage$/, function () {
+  this.Then(/^I see inline error mesasage$/, function () {
     expect( LoginPage.passwdErrorMsg.isVisible() ).toBe(true);
   });
   
