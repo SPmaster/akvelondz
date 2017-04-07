@@ -1,10 +1,10 @@
 var LoginPage = require('./pageobjects/login.page');
 var MailBoxPage = require('./pageobjects/mailbox.page');
-var account = require('../account');
+var account = require('../testdata/account');
 const boxUrl = 'https://mail.google.com/';
 
+
 var myStepDefinitionsWrapper = function () {
-  
   this.Given(/^I have email with password$/, function () {
     expect(account.email).toBeDefined();
     expect(account.passwd).toBeDefined();
@@ -16,13 +16,13 @@ var myStepDefinitionsWrapper = function () {
 
   this.Given(/^I go to password page$/, function () {
     if ( !LoginPage.passwdInputField.isVisible() ){
-        if ( browser.getUrl().startsWith(boxUrl) ) MailBoxPage.signOut();
-        if ( LoginPage.emailInputField.isVisible() ) LoginPage.submitEmail(account.email);
+       if ( browser.getUrl().startsWith(boxUrl) ) MailBoxPage.signOut();
+       if ( LoginPage.emailInputField.isVisible() ) LoginPage.submitEmail(account.email);
     }
   });
 
   this.When(/^I submit "([^"]*)" password$/, function (passkey) {
-   switch(passkey){
+    switch(passkey){
        case 'valid':
        LoginPage.submitPasswd(account.passwd);
        break;
@@ -47,23 +47,17 @@ var myStepDefinitionsWrapper = function () {
   });
   
   this.Then(/^I have access to my mail-box$/, function () {
-    if ( !browser.getUrl().startsWith(boxUrl) ) {
-            MailBoxPage.open();
-		    if (browser.alertText() ) browser.alertAccept();
-        }
+    if ( !browser.getUrl().startsWith(boxUrl) ) MailBoxPage.open();
     expect( browser.getUrl().startsWith(boxUrl) ).toBe(true);
     expect( MailBoxPage.getTitle() ).toContain(account.email);
   });
-  
+
   this.Given(/^I'm logged in to my mail-box$/, function () {
-    if ( !browser.getUrl().startsWith(boxUrl) ) {
-        LoginPage.open();
-        LoginPage.emailInputField.isVisible() ? LoginPage.login(account) : LoginPage.submitPasswd(account.passwd);
-    }
+    LoginPage.login(account);
   });
-  
+
   this.When(/^I sign out$/, function () {
-   MailBoxPage.signOut();
+    MailBoxPage.signOut();
   });
   
   this.Then(/^I see password page for my account$/, function () {

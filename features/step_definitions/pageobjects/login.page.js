@@ -10,8 +10,10 @@ var LoginPage = Object.create(Page, {
     passwdErrorMsg:    { get: function () { return browser.element('#errormsg_0_Passwd');}},
 
     login: { value: function(account) {
-        this.submitEmail(account.email);
-        this.submitPasswd(account.passwd);
+        if ( !browser.getUrl().startsWith('https://mail.google.com/') ){
+            if ( this.emailInputField.isVisible() ) this.submitEmail(account.email);
+            this.submitPasswd(account.passwd);
+        }
     } },
     
     submitEmail: { value: function(email) {
@@ -27,3 +29,4 @@ var LoginPage = Object.create(Page, {
     } }
 });
 module.exports = LoginPage;
+ 

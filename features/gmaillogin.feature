@@ -1,5 +1,3 @@
-@watch
-
 Feature: Log in/out in to Gmail
   As a mail-box owner 
   I want to login and logout in to the box
