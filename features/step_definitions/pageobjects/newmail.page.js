@@ -40,6 +40,7 @@ var NewMailPage= Object.create(Page, {
     undoDiscard: { value: function() {
         this.discardUndo.waitForVisible();
         this.discardUndo.click();
+        return true;
     }},
     
     setSubject: { value: function(data) {

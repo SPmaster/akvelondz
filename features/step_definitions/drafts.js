@@ -18,7 +18,7 @@ module.exports = function () {
   
   this.Then(/^I can open it from Drafts folder$/, function () {
     MailBoxPage.gotoDrafts();
-    MailBoxPage.openNthInList(0);
+    expect( MailBoxPage.openNthInList(0) ).toBe(true);
   });
   
   this.When(/^I add "([^"]*)" to the email$/, function (dataType) {
@@ -97,6 +97,6 @@ module.exports = function () {
   });
   
   this.Then(/^I can undo discard$/, function () {
-    NewMailPage.undoDiscard();
+    expect( NewMailPage.undoDiscard() ).toBe(true);
   });
 };

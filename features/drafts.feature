@@ -1,4 +1,3 @@
-@watch
 Feature: Gmail email drafts
   As a mail-box owner 
   I want an unsent emails to be autosaved as drafts
@@ -10,6 +9,7 @@ Feature: Gmail email drafts
     And     I'm logged in to my mail-box
     And     Drafts folder is empty
     And     I'm writing a new email
+
   Scenario: Unchanged new email will not be saved
     When    I wait for 5 seconds
     And     I close email without sending it
