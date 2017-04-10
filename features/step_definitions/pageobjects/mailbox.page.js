@@ -40,7 +40,7 @@ var MailBoxPage= Object.create(Page, {
     }},
     
     openNthInList: { value: function(n) {
-        this.mailsList[n].waitForVisible(5000);
+        this.mailsList[n].waitForVisible();
         this.mailsList[n].click();
     }},
     

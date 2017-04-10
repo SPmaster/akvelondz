@@ -38,7 +38,7 @@ var NewMailPage= Object.create(Page, {
     }},
     
     undoDiscard: { value: function() {
-        this.discardUndo.waitForVisible(5000);
+        this.discardUndo.waitForVisible();
         this.discardUndo.click();
     }},
     
@@ -48,7 +48,7 @@ var NewMailPage= Object.create(Page, {
     }},
     
     getSubject: { value: function() {
-        this.subject.waitForValue(3000);
+        this.subject.waitForValue();
         return this.subject.getValue();
     }},
     
@@ -58,7 +58,7 @@ var NewMailPage= Object.create(Page, {
     }},
     
     getTo: { value: function() {
-        this.toVal.waitForValue(3000);
+        this.toVal.waitForValue();
         return this.toVal.getValue();
     }},
     
@@ -70,7 +70,7 @@ var NewMailPage= Object.create(Page, {
     }},
     
     getCc: { value: function() {
-        this.ccVal.waitForValue(3000);
+        this.ccVal.waitForValue();
         return this.ccVal.getValue();
     }},
     
@@ -81,7 +81,7 @@ var NewMailPage= Object.create(Page, {
     }},
     
     getImgUrl: { value: function() {
-        this.ahrefInBody.waitForVisible(5000);
+        this.ahrefInBody.waitForVisible();
         return this.ahrefInBody.getAttribute('href');
     }},
     
@@ -89,14 +89,14 @@ var NewMailPage= Object.create(Page, {
         this.addDocsButton.click();
         let gdpf = this.gdPickerFrame.value;
         browser.frame(gdpf);
-        this.gdDoc.waitForVisible(5000);
+        this.gdDoc.waitForVisible();
         this.gdDoc.click(); 
         this.gdInsertButton.click();
         browser.frame();
     }},
    
     getGdoc: { value: function() {
-        this.gdInBody.waitForVisible(5000);
+        this.gdInBody.waitForVisible();
         return this.gdInBody.getText();
     }},
     
@@ -106,7 +106,7 @@ var NewMailPage= Object.create(Page, {
     }},
    
     getFileName: { value: function() {
-        this.fileName.waitForVisible(9000);
+        this.fileName.waitForVisible();
         return this.fileName.getText();
     }},
     
@@ -115,7 +115,7 @@ var NewMailPage= Object.create(Page, {
     }},
     
     hasErrorAlert: { value: function() {
-        return this.errorAlert.waitForVisible(5000);
+        return this.errorAlert.waitForVisible();
     }}
 });
 module.exports = NewMailPage;
