@@ -6,7 +6,7 @@ var MailBoxPage= Object.create(Page, {
     signOutButton:   { get: function () { return browser.element('=Sign out'); }},
     composeButton:   { get: function () { return browser.$$('[role=button]')[8]; }},
     mailsList:       { get: function () { return browser.$$('[role="main"] .Cp tr'); }},
-    drafts:          { get: function () { return browser.$('a[href="https://mail.google.com/mail/#drafts"]'); }},
+    drafts:          { get: function () { return browser.$('a[href$="#drafts"]'); }},
     cachedLists:     { get: function () { return browser.$$('.BltHke'); }},
     selectAll:       { get: function () { return browser.$('[gh="mtb"] [role="checkbox"]'); }},
     discardSelected: { get: function () { return browser.$('[act="16"]'); }},
