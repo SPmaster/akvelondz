@@ -11,7 +11,9 @@ var LoginPage = Object.create(Page, {
 
     login: { value: function(account) {
         if ( !browser.getUrl().startsWith('https://mail.google.com/') ){
-            if ( this.emailInputField.isVisible() ) this.submitEmail(account.email);
+            if ( this.emailInputField.isVisible() ) {
+                this.submitEmail(account.email);
+            }
             this.submitPasswd(account.passwd);
         }
     } },

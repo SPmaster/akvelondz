@@ -16,8 +16,12 @@ var myStepDefinitionsWrapper = function () {
 
   this.Given(/^I go to password page$/, function () {
     if ( !LoginPage.passwdInputField.isVisible() ){
-       if ( browser.getUrl().startsWith(boxUrl) ) MailBoxPage.signOut();
-       if ( LoginPage.emailInputField.isVisible() ) LoginPage.submitEmail(account.email);
+       if ( browser.getUrl().startsWith(boxUrl) ) {
+           MailBoxPage.signOut();
+       }
+       if ( LoginPage.emailInputField.isVisible() ) {
+           LoginPage.submitEmail(account.email);
+       }
     }
   });
 
@@ -47,7 +51,9 @@ var myStepDefinitionsWrapper = function () {
   });
   
   this.Then(/^I have access to my mail-box$/, function () {
-    if ( !browser.getUrl().startsWith(boxUrl) ) MailBoxPage.open();
+    if ( !browser.getUrl().startsWith(boxUrl) ) {
+        MailBoxPage.open();
+    }
     expect( browser.getUrl().startsWith(boxUrl) ).toBe(true);
     expect( MailBoxPage.getTitle() ).toContain(account.email);
   });
@@ -61,8 +67,7 @@ var myStepDefinitionsWrapper = function () {
   });
   
   this.Then(/^I see password page for my account$/, function () {
-    LoginPage.passwdInputField.waitForVisible();
-    expect( LoginPage.passwdInputField.isVisible() ).toBe(true);
+    expect( LoginPage.passwdInputField.waitForVisible() ).toBe(true);
     expect( LoginPage.emailDisplayed.getText() ).toBe(account.email);
   });
 };

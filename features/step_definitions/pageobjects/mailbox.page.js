@@ -23,14 +23,18 @@ var MailBoxPage= Object.create(Page, {
     gotoDrafts: { value: function() {
         if (this.getUrl().includes('#drafts')) {
             browser.refresh();
-            if ( this.dismissAlerts() ) this.gotoDrafts();
+            if ( this.dismissAlerts() ) {
+                this.gotoDrafts();
+            }
         } else {
             function isActiveList(list){
                 return list.isVisible();
             };
             var activeList = this.cachedLists.find(isActiveList);
             this.drafts.click();
-            if ( this.dismissAlerts() ) this.gotoDrafts();
+            if ( this.dismissAlerts() ) {
+                this.gotoDrafts();
+            } 
             activeList.waitForVisible(5000, true);  
        }
     }},

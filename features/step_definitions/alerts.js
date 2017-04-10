@@ -7,7 +7,11 @@ module.exports = function () {
   });
 
   this.Then(/^I see "([^"]*)" alert$/, function (alertType) {
-    if (alertType == "warning")  expect( NewMailPage.dismissAlerts() ).toBe(true);
-    if (alertType == "error") expect( NewMailPage.hasErrorAlert() ).toBe(true);  
+    if (alertType == "warning") {
+        expect( NewMailPage.dismissAlerts() ).toBe(true);
+    } 
+    if (alertType == "error") {
+        expect( NewMailPage.hasErrorAlert() ).toBe(true);  
+    }
   }); 
 };
