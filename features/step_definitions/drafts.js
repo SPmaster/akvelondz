@@ -61,11 +61,11 @@ module.exports = function () {
        break;
        
        case 'recipient':
-       expect( NewMailPage.getTo() ).toBe(maildata.to);
+       expect( NewMailPage.getTo() ).toContain(maildata.to);
        break;
        
        case 'Cc':
-       expect( NewMailPage.getCc() ).toBe(maildata.cc);
+       expect( NewMailPage.getCc() ).toContain(maildata.cc);
        break;
        
        case 'img url':
@@ -84,7 +84,7 @@ module.exports = function () {
    }
   });
 
-  this.Then(/^I.* discard draft$/, function () {
+  this.When(/^I.* discard draft$/, function () {
     NewMailPage.discard();
   });
   

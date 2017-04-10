@@ -9,7 +9,6 @@ Feature: Gmail email drafts
     And     I'm logged in to my mail-box
     And     Drafts folder is empty
     And     I'm writing a new email
-@watch
   Scenario: Unchanged new email will not be saved
     When    I wait for 5 seconds
     And     I close email without sending it
@@ -22,12 +21,11 @@ Feature: Gmail email drafts
     And     I can open it from Drafts folder
     And     Added data is on its place
     
-  Scenario Outline: An email draft with some data
+  Scenario Outline: An email draft with <data> data
     When    I add <data> to the email
     And     I close email without sending it
     Then    I can open it from Drafts folder
     And     Added data is on its place
-    And     I can discard draft
       Examples:
       | data |
       | "subject" |
