@@ -9,9 +9,9 @@ Feature: Gmail email drafts
     And     I'm logged in to my mail-box
     And     Drafts folder is empty
     And     I'm writing a new email
-
+@watch
   Scenario: Unchanged new email will not be saved
-    When    I do nothing
+    When    I wait for 5 seconds
     And     I close email without sending it
     Then    It will not be saved in Drafts
 

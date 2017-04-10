@@ -88,8 +88,8 @@ module.exports = function () {
     NewMailPage.discard();
   });
   
-  this.When(/^I do nothing$/, function () {
-    browser.pause(5*1000);
+  this.When(/^I wait for (\d+) seconds$/, function (sec) {
+    browser.pause(sec*1000);
   });
   
   this.Then(/^It will not be saved in Drafts$/, function () {
