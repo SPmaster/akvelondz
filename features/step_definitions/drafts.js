@@ -84,7 +84,7 @@ module.exports = function () {
    }
   });
 
-  this.When(/^I.* discard draft$/, function () {
+  this.When(/^I discard draft$/, function () {
     NewMailPage.discard();
   });
   
