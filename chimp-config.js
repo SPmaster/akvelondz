@@ -1,6 +1,6 @@
 module.exports = {
   webdriverio: {
-      waitforTimeout: 6000,
+      waitforTimeout: 9000,
       debug: false
   },
   log: 'info',
