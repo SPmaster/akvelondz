@@ -1,4 +1,4 @@
-@loggedin
+@cleanup
 Feature: Gmail email alerts
   As a mail sender 
   I want to be allerted if I miss something
@@ -7,6 +7,7 @@ Feature: Gmail email alerts
   Background:
     Given   I have email with password
     And     I browse my mail-box
+    And     I'm logged in to my mail-box
     And     I'm writing a new email
     
   Scenario: Missed subject

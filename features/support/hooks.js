@@ -7,19 +7,8 @@ module.exports = function () {
         MailBoxPage.acceptAlerts();
     });
     
-    this.Before({tags: ["@loggedin"]}, function() {
-        if ( !MailBoxPage.isLoggedIn() ) {
-            MailBoxPage.login(account);
-        }
-    });
-    
-    this.After({tags: ["@rmdrafts"]}, function() {
-        if ( MailBoxPage.isLoggedIn() ) {
+    this.After({tags: ["@cleanup"]}, function() {
             MailBoxPage.rmDrafts();
-        }
     });
     
-    
-
-
 };

@@ -1,4 +1,4 @@
-@rmdrafts @loggedin
+@cleanup
 Feature: Gmail email drafts
   As a mail-box owner 
   I want an unsent emails to be autosaved as drafts
@@ -7,6 +7,7 @@ Feature: Gmail email drafts
   Background:
     Given   I have email with password
     And     I browse my mail-box
+    And     I'm logged in to my mail-box
     And     I'm writing a new email
 
   Scenario: Unchanged new email will not be saved
