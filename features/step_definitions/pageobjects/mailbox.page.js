@@ -2,8 +2,8 @@ var Page = require('./page')
 
 var MailBoxPage= Object.create(Page, {
 
-    accountMenu:     { get: function () { return browser.element('a[title*=Account]'); }},
-    signOutButton:   { get: function () { return browser.element('=Sign out'); }},
+    accountMenu:     { get: function () { return browser.$('a[href*="SignOut"]'); }},
+    signOutButton:   { get: function () { return browser.$('=Sign out'); }},
     composeButton:   { get: function () { return browser.$$('[role=button]')[8]; }},
     mailsList:       { get: function () { return browser.$$('[role="main"] .Cp tr'); }},
     drafts:          { get: function () { return browser.$('a[href*="#drafts"]'); }},
@@ -62,6 +62,13 @@ var MailBoxPage= Object.create(Page, {
     getDraftsNum: { value: function() {
         this.gotoDrafts();
         return this.mailsList.length;
+    }},
+    
+    isLoggedIn: { value: function() {
+        if (this.accountMenu.isVisible()) {
+            return this.accountMenu.getAttribute('title').split(')')[0].split('(')[1];
+        }
+        return false;
     }}
     
 });

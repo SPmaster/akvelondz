@@ -1,7 +1,6 @@
 var LoginPage = require('./pageobjects/login.page');
 var MailBoxPage = require('./pageobjects/mailbox.page');
 var account = require('../testdata/account');
-const boxUrl = 'https://mail.google.com/';
 
 
 var myStepDefinitionsWrapper = function () {
@@ -16,10 +15,9 @@ var myStepDefinitionsWrapper = function () {
 
   this.Given(/^I go to password page$/, function () {
     if ( !LoginPage.passwdInputField.isVisible() ){
-       if ( browser.getUrl().startsWith(boxUrl) ) {
+       if ( MailBoxPage.isLoggedIn() ) {
            MailBoxPage.signOut();
-       }
-       if ( LoginPage.emailInputField.isVisible() ) {
+       } else {
            LoginPage.submitEmail(account.email);
        }
     }
@@ -47,15 +45,11 @@ var myStepDefinitionsWrapper = function () {
   
   this.Then(/^I must have no access to my mail-box$/, function () {
     MailBoxPage.open();
-	expect( browser.getUrl().startsWith(boxUrl) ).not.toBe(true);
+	expect( MailBoxPage.isLoggedIn() ).toBe(false);
   });
   
   this.Then(/^I have access to my mail-box$/, function () {
-    if ( !browser.getUrl().startsWith(boxUrl) ) {
-        MailBoxPage.open();
-    }
-    expect( browser.getUrl().startsWith(boxUrl) ).toBe(true);
-    expect( MailBoxPage.getTitle() ).toContain(account.email);
+    expect( MailBoxPage.isLoggedIn() ).toBe(account.email);
   });
 
   this.Given(/^I'm logged in to my mail-box$/, function () {

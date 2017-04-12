@@ -1,3 +1,4 @@
+@rmdrafts @loggedin
 Feature: Gmail email drafts
   As a mail-box owner 
   I want an unsent emails to be autosaved as drafts
@@ -6,15 +7,13 @@ Feature: Gmail email drafts
   Background:
     Given   I have email with password
     And     I browse my mail-box
-    And     I'm logged in to my mail-box
-    And     Drafts folder is empty
     And     I'm writing a new email
 
   Scenario: Unchanged new email will not be saved
     When    I wait for 5 seconds
     And     I close email without sending it
     Then    It will not be saved in Drafts
-
+    
   Scenario: Undo draft discard
     When    I add "subject" to the email
     And     I discard draft
@@ -32,6 +31,6 @@ Feature: Gmail email drafts
       | "subject" |
       | "recipient" |
       | "Cc" |
-      | "img url" |
+#      | "img url" |
 #      | "Google drive file" |
 #      | "local attachment file" |

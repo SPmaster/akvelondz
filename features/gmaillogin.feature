@@ -1,4 +1,3 @@
-@ignore
 Feature: Log in/out in to Gmail
   As a mail-box owner 
   I want to login and logout in to the box
@@ -8,7 +7,7 @@ Feature: Log in/out in to Gmail
     Given   I have email with password
     And     I browse my mail-box
     And     I go to password page
-    
+
   Scenario Outline: Enter not valid password
     When    I submit <pass> password
     Then    I see inline error mesasage
