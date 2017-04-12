@@ -8,6 +8,11 @@ Feature: Gmail email alerts
     And     I browse my mail-box
     And     I'm logged in to my mail-box
     And     I'm writing a new email
+    
+  Scenario: Missed subject
+    When    I add "recipient" to the email
+    And     I send email
+    Then    I see "warning" alert 
 
   Scenario: Missed recipient's email
     When    I send email
@@ -18,9 +23,4 @@ Feature: Gmail email alerts
     And     I add "subject" to the email
     And     I send email
     Then    I see "error" alert 
-    
-  Scenario: Missed subject
-    When    I add "recipient" to the email
-    And     I send email
-    Then    I see "warning" alert 
     

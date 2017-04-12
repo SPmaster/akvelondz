@@ -13,7 +13,7 @@ module.exports = function () {
   });
   
   this.When(/^I close email without sending it$/, function () {
-    NewMailPage.closeEmail();
+    MailBoxPage.closeEmail();
   });
   
   this.Then(/^I can open it from Drafts folder$/, function () {

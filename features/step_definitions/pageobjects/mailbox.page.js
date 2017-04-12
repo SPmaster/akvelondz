@@ -10,7 +10,13 @@ var MailBoxPage= Object.create(Page, {
     cachedLists:     { get: function () { return browser.$$('.BltHke'); }},
     selectAll:       { get: function () { return browser.$('[gh="mtb"] [role="checkbox"]'); }},
     discardSelected: { get: function () { return browser.$('[act="16"]'); }},
+    closeEmailButton: { get: function () { return browser.$('img.Ha'); }},
+
     
+        closeEmail: { value: function() {
+        this.closeEmailButton.click();
+    }},
+  
     signOut: { value: function() {
         this.accountMenu.click();
 		this.signOutButton.click();

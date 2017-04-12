@@ -33,5 +33,5 @@ Feature: Gmail email drafts
       | "recipient" |
       | "Cc" |
       | "img url" |
-      | "Google drive file" |
-      | "local attachment file" |
+#      | "Google drive file" |
+#      | "local attachment file" |
