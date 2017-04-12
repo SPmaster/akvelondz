@@ -1,4 +1,4 @@
-@cleanup
+@cleanup 
 Feature: Gmail email alerts
   As a mail sender 
   I want to be allerted if I miss something

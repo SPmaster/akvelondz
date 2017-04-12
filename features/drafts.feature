@@ -1,4 +1,4 @@
-@cleanup
+@cleanup 
 Feature: Gmail email drafts
   As a mail-box owner 
   I want an unsent emails to be autosaved as drafts
@@ -32,6 +32,6 @@ Feature: Gmail email drafts
       | "subject" |
       | "recipient" |
       | "Cc" |
-#      | "img url" |
-#      | "Google drive file" |
-#      | "local attachment file" |
+      | "img url" |
+      | "Google drive file" |
+      | "local attachment file" |

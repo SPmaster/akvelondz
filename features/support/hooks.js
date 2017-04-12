@@ -1,4 +1,5 @@
 var MailBoxPage = require('../step_definitions/pageobjects/mailbox.page');
+var NewMailPage = require('../step_definitions/pageobjects/newmail.page');
 
 module.exports = function () {
 
@@ -7,7 +8,8 @@ module.exports = function () {
     });
     
     this.After({tags: ["@cleanup"]}, function() {
-            MailBoxPage.rmDrafts();
+        NewMailPage.discardAllActive();
+        MailBoxPage.rmDrafts();
     });
     
 };

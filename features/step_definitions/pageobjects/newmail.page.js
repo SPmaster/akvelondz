@@ -3,7 +3,7 @@ var Page = require('./page')
 var NewMailPage= Object.create(Page, {
     
     closeEmailButton: { get: function () { return browser.$('img.Ha'); }},
-    discardButton:    { get: function () { return browser.$('.oh'); }},
+    discardButtons:    { get: function () { return browser.$$('.oh'); }},
     discardUndo:      { get: function () { return browser.$('#link_undo'); }},
     subjectbox:       { get: function () { return browser.$('[name="subjectbox"]'); }},
     subject:          { get: function () { return browser.$('[name="subject"]'); }},
@@ -34,7 +34,16 @@ var NewMailPage= Object.create(Page, {
     }},
     
     discard: { value: function() {
-        this.discardButton.click();
+        this.discardButtons[0].click();
+    }},
+    
+    discardAllActive: { value: function() {
+        let toDiscard = this.discardButtons;
+        if ( toDiscard.length ) {
+            for ( let active of toDiscard ) {
+                active.click();
+            }
+        }
     }},
     
     undoDiscard: { value: function() {

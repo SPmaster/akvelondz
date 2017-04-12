@@ -9,12 +9,10 @@ module.exports = function () {
   this.Then(/^I see "([^"]*)" alert$/, function (alertType) {
     if (alertType == "warning") {
         expect( NewMailPage.dismissAlerts() ).toBe(true);
-        NewMailPage.discard();
     } 
     if (alertType == "error") {
         expect( NewMailPage.hasErrorAlert() ).toBe(true);
         NewMailPage.okButton.click();
-        NewMailPage.discard();        
     }
   }); 
 };
