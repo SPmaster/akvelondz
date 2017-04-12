@@ -19,7 +19,6 @@ Feature: Gmail email drafts
     When    I add "subject" to the email
     And     I discard draft
     Then    I can undo discard
-    And     I can open it from Drafts folder
     And     Added data is on its place
     
   Scenario Outline: An email draft with <data> data

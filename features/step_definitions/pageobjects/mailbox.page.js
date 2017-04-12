@@ -10,8 +10,9 @@ var MailBoxPage= Object.create(Page, {
     cachedLists:     { get: function () { return browser.$$('.BltHke'); }},
     selectAll:       { get: function () { return browser.$('[gh="mtb"] [role="checkbox"]'); }},
     discardSelected: { get: function () { return browser.$('[act="16"]'); }},
+    refreshButton:   { get: function () { return browser.$('[act="20"]'); }},
 
-  
+   
     signOut: { value: function() {
         this.accountMenu.click();
 		this.signOutButton.click();
@@ -21,12 +22,13 @@ var MailBoxPage= Object.create(Page, {
         this.composeButton.click();
     }},
     
+    refreshList: { value: function() {
+        this.refreshButton.click();
+    }},
+    
     gotoDrafts: { value: function() {
         if (this.getUrl().includes('#drafts')) {
-            browser.refresh();
-            if ( this.dismissAlerts() ) {
-                this.gotoDrafts();
-            }
+            this.refreshList();
         } else {
             function isActiveList(list){
                 return list.isVisible();
@@ -35,6 +37,7 @@ var MailBoxPage= Object.create(Page, {
             this.drafts.waitForVisible();
             this.drafts.click();
             if ( this.dismissAlerts() ) {
+                browser.pause(1000);
                 this.gotoDrafts();
             } 
             activeList.waitForVisible(5000, true);  
