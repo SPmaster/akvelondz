@@ -2,6 +2,7 @@ var Page = require('./page')
 
 var NewMailPage= Object.create(Page, {
     
+    closeEmailButton: { get: function () { return browser.$('img.Ha'); }},
     discardButton:    { get: function () { return browser.$('.oh'); }},
     discardUndo:      { get: function () { return browser.$('#link_undo'); }},
     subjectbox:       { get: function () { return browser.$('[name="subjectbox"]'); }},
@@ -28,6 +29,10 @@ var NewMailPage= Object.create(Page, {
     errorAlert:       { get: function () { return browser.$('[role="alertdialog"]'); }},
 
         
+    closeEmail: { value: function() {
+        this.closeEmailButton.click();
+    }},
+    
     discard: { value: function() {
         this.discardButton.click();
     }},

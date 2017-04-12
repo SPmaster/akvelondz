@@ -3,17 +3,13 @@ var NewMailPage = require('./pageobjects/newmail.page');
 var maildata = require('../testdata/maildata');
 
 module.exports = function () {
-  
-  this.Given(/^Drafts folder is empty$/, function () {
-    MailBoxPage.rmDrafts();
-  });
-  
+    
   this.Given(/^I'm writing a new email$/, function () {
     MailBoxPage.compose();
   });
   
   this.When(/^I close email without sending it$/, function () {
-    MailBoxPage.closeEmail();
+    NewMailPage.closeEmail();
   });
   
   this.Then(/^I can open it from Drafts folder$/, function () {

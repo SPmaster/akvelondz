@@ -1,5 +1,4 @@
 var MailBoxPage = require('../step_definitions/pageobjects/mailbox.page');
-var account = require('../testdata/account');
 
 module.exports = function () {
 
