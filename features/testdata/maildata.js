@@ -2,8 +2,8 @@ var path = require('path');
 
 var maildata = {
     subject : 'Some text for subject',
-    to : 'd006068@gmail.com',
-    cc : 'd006068+cc@gmail.com',
+    to : '@gmail.com',
+    cc : '@gmail.com',
     local : {
         path: '',
         name: 'attachment.txt'
@@ -13,5 +13,7 @@ var maildata = {
     wrongTo : '',
 };
 maildata.local.path = path.join(__dirname, maildata.local.name);
+maildata.to = Math.random().toString(36).substring(2) + maildata.to;
+maildata.cc = Math.random().toString(36).substring(2) + maildata.cc;
 maildata.wrongTo = Math.random().toString(36).substring(2);
 module.exports = maildata;

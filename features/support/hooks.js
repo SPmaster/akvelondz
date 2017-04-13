@@ -8,8 +8,14 @@ module.exports = function () {
     });
     
     this.After({tags: ["@cleanup"]}, function() {
-        NewMailPage.discardAllActive();
-        MailBoxPage.rmDrafts();
+        try {
+            NewMailPage.discardAllActive();
+        }catch (e){  }
+        
+        try {
+            MailBoxPage.rmDrafts();
+        }catch (e){  }
+        
     });
     
 };
