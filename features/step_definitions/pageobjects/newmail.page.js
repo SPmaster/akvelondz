@@ -53,6 +53,7 @@ var NewMailPage= Object.create(Page, {
     }},
     
     setSubject: { value: function(data) {
+        this.subjectbox.waitForVisible();
         this.subjectbox.click();
         this.subjectbox.setValue(data);
     }},
@@ -63,6 +64,7 @@ var NewMailPage= Object.create(Page, {
     }},
     
     setTo: { value: function(data) {
+        this.toField.waitForVisible();
         this.toField.click();
         this.toField.setValue(data);
     }},
@@ -73,8 +75,10 @@ var NewMailPage= Object.create(Page, {
     }},
     
     setCc: { value: function(data) {
+        this.toField.waitForVisible();
         this.toField.click();
         this.ccLink.click();
+        this.ccField.waitForVisible();
         this.ccField.click();
         this.ccField.setValue(data);
     }},
@@ -117,6 +121,7 @@ var NewMailPage= Object.create(Page, {
    
     getFileName: { value: function() {
         this.fileName.waitForVisible();
+        this.fileName.waitForText();
         return this.fileName.getText();
     }},
     
